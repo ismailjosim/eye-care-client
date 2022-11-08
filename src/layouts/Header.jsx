@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const Header = () => {
+    const { user, userLogout } = useContext(AuthContext);
     const menuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/about'>about</Link></li>
@@ -10,7 +12,9 @@ const Header = () => {
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/contact'>Contact</Link></li>
     </>
-
+    const handleUserRemove = () => {
+        userLogout().then(result => { }).catch(error => console.log(error.message))
+    }
 
     return (
         <div className="navbar bg-base-100 h-20 mb-5 font-semibold w-11/12 mx-auto">
@@ -33,7 +37,17 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-
+                {user?.email ?
+                    <div className='flex gap-3 items-center'>
+                        <li className='list-none'><Link to='/orders'>Orders</Link></li>
+                        <div className="tooltip tooltip-primary tooltip-bottom" data-tip={user.displayName}>
+                            <img className='rounded-full w-12' alt={user.displayName} src={user.photoURL} />
+                        </div>
+                        <button onClick={handleUserRemove} className="btn btn-md rounded-md btn-outline btn-primary">Logout</button>
+                    </div>
+                    :
+                    <Link to='/login' className="btn btn-md rounded-md btn-outline btn-primary">Log In</Link>
+                }
             </div>
         </div>
     );
@@ -44,13 +58,5 @@ export default Header;
 
 
 
-        // <div className='flex gap-3 items-center'>
-        //     <li className='list-none'><Link to='/orders'>Orders</Link></li>
-        //     <div className="tooltip tooltip-primary tooltip-bottom" data-tip={user.displayName}>
-        //         <img className='rounded-full w-12' alt={user.displayName} src={user.photoURL} />
-        //     </div>
-        //     <button onClick={handleUserRemove} className="btn btn-md rounded-md btn-outline btn-primary">Logout</button>
-        // </div>
 
-        // <Link to='/login' className="btn btn-md rounded-md btn-outline btn-primary">Log In</Link>
 
