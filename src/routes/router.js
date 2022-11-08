@@ -8,9 +8,10 @@ import Contact from '../components/Pages/Contact/Contact';
 import Home from '../components/Pages/Home/Home';
 import ServiceDetails from '../components/Pages/Services/ServiceDetails';
 import Services from '../components/Pages/Services/Services';
-import Dashboard from '../components/User/Dashboard';
+import Review from '../components/User/Review';
 import UserServices from '../components/User/UserServices';
 import Root from '../layouts/Root';
+import PrivateRouter from './PrivateRouter';
 
 const router = createBrowserRouter([
     {
@@ -52,12 +53,12 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/service/${ params.id }`)
             },
             {
-                path: '/userServices',
+                path: '/addService',
                 element: <UserServices />
             },
             {
-                path: '/dashboard',
-                element: <Dashboard />
+                path: '/review',
+                element: <PrivateRouter><Review /></PrivateRouter>
             }
         ]
     }

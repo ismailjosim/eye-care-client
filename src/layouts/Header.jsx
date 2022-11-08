@@ -39,8 +39,8 @@ const Header = () => {
             <div className="navbar-end">
                 {user?.email ?
                     <div className='flex gap-3 items-center'>
-                        <li className='list-none'><Link to='/userServices'>My Services</Link></li>
-                        <li className='list-none'><Link to='/dashboard'>Dashboard</Link></li>
+                        <li className='list-none'><Link to='/review'>My Reviews</Link></li>
+                        <li className='list-none'><Link to='/addService'>Add Services</Link></li>
                         <div className="tooltip tooltip-primary tooltip-bottom" data-tip={user.displayName}>
                             <img className='rounded-full w-12' alt={user.displayName} src={user.photoURL} />
                         </div>
