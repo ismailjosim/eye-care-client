@@ -6,6 +6,7 @@ import About from '../components/Pages/About/About';
 import Blog from '../components/Pages/Blog/Blog';
 import Contact from '../components/Pages/Contact/Contact';
 import Home from '../components/Pages/Home/Home';
+import ServiceDetails from '../components/Pages/Services/ServiceDetails';
 import Services from '../components/Pages/Services/Services';
 import Root from '../layouts/Root';
 
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <UserSignUp />
+            },
+            {
+                path: '/service/:id',
+                element: <ServiceDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/service/${ params.id }`)
             }
         ]
     }

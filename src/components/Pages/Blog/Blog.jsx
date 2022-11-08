@@ -46,6 +46,7 @@ const Blog = () => {
                     </div>
                 </div>
             </div>
+
             <div className="w-9/12 mx-auto">
                 <div className="">
                     <div className="my-3">
@@ -79,6 +80,7 @@ const Blog = () => {
                     </div>
                 </div>
             </div>
+
             <div className="w-9/12 mx-auto">
                 <div className="">
                     <div className="my-3">
@@ -112,6 +114,7 @@ const Blog = () => {
                     </div>
                 </div>
             </div>
+
             <div className="w-9/12 mx-auto">
                 <div className="">
                     <div className="my-3">
