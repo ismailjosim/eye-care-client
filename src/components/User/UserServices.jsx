@@ -1,17 +1,40 @@
 import React from 'react';
 import svg from '../../assets/form/doodle.svg'
+import { toast } from 'react-toastify';
 
 const UserServices = () => {
 
     const handleAddProduct = event => {
         event.preventDefault()
         const form = event.target;
-        const product = {
+        const service = {
             title: form.name.value,
             img: form.img.value,
             price: form.price.value,
             description: form.description.value,
         };
+        console.log(service);
+        fetch('http://localhost:5000/services', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(service)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.success) {
+                    toast.success('Product Added Successfully!', { autoClose: 1000 })
+
+                } else {
+                    toast.error(data.message)
+                }
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
     }
 
 
