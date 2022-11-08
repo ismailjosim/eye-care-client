@@ -8,6 +8,8 @@ import Contact from '../components/Pages/Contact/Contact';
 import Home from '../components/Pages/Home/Home';
 import ServiceDetails from '../components/Pages/Services/ServiceDetails';
 import Services from '../components/Pages/Services/Services';
+import Dashboard from '../components/User/Dashboard';
+import UserServices from '../components/User/UserServices';
 import Root from '../layouts/Root';
 
 const router = createBrowserRouter([
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
                 path: '/service/:id',
                 element: <ServiceDetails />,
                 loader: ({ params }) => fetch(`http://localhost:5000/service/${ params.id }`)
+            },
+            {
+                path: '/userServices',
+                element: <UserServices />
+            },
+            {
+                path: '/dashboard',
+                element: <Dashboard />
             }
         ]
     }
