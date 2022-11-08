@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 
 const ServiceCard = ({ service }) => {
@@ -7,7 +9,13 @@ const ServiceCard = ({ service }) => {
 
     return (
         <div className="card bg-base-100 shadow-xl">
-            <figure><img src={img} alt={title} /></figure>
+            <figure>
+                <PhotoProvider>
+                    <PhotoView src={img}>
+                        <img src={img} alt={title} />
+                    </PhotoView>
+                </PhotoProvider>
+            </figure>
             <div className="card-body">
                 <h2 className="card-title">{title} </h2>
                 <p className='text-justify mb-2'>{description.slice(0, 100)}..</p>
@@ -22,3 +30,4 @@ const ServiceCard = ({ service }) => {
 };
 
 export default ServiceCard;
+// <img src={img} alt={title} />
