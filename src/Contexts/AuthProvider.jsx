@@ -43,10 +43,7 @@ const AuthProvider = ({ children }) => {
     const googleProviderLogin = provider => {
         return signInWithPopup(auth, provider)
     }
-    // sign in with gitHub Provider
-    const gitHubProviderLogin = provider => {
-        return signInWithPopup(auth, provider)
-    }
+
 
     // Monitor User change
     useEffect(() => {
@@ -68,7 +65,6 @@ const AuthProvider = ({ children }) => {
         userLogin,
         userLogout,
         updateUserProfile,
-        gitHubProviderLogin,
         googleProviderLogin
     }
 
