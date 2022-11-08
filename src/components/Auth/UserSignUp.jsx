@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import loginImg from '../../assets/slider/slider05.jpg'
+import useTitle from '../../hooks/useTitle';
 
 
 const UserSignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
-
+    useTitle('Sign Up')
 
     const handleUserSignUP = event => {
         event.preventDefault();

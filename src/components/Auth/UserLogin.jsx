@@ -4,8 +4,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import loginImg from '../../assets/slider/slider05.jpg'
 import { AuthContext } from '../../Contexts/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const UserLogin = () => {
+    useTitle('Log In')
     const { userLogin, googleProviderLogin } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();

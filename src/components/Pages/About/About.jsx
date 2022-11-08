@@ -1,6 +1,8 @@
 import React from 'react';
+import useTitle from '../../../hooks/useTitle';
 
 const About = () => {
+    useTitle('About Me')
     return (
         <div>
             <section className="bg-primary py-10 relative">

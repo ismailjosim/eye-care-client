@@ -1,8 +1,10 @@
 import React from 'react';
 import svg from '../../assets/form/doodle.svg'
 import { toast } from 'react-toastify';
+import useTitle from '../../hooks/useTitle';
 
 const UserServices = () => {
+    useTitle('Add Service')
 
     const handleAddProduct = event => {
         event.preventDefault()

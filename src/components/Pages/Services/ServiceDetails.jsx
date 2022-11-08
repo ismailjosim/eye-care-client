@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../../hooks/useTitle';
 
 const ServiceDetails = () => {
     const serviceDetails = useLoaderData();
     const { img, description, price, title } = serviceDetails.service;
+    useTitle('Service Details')
 
     return (
         <div className='my-10 page-title-overlay'>
@@ -29,7 +31,9 @@ const ServiceDetails = () => {
                         </div>
                     </div>
                 </div>
+                <h3>Add Review Here</h3>
             </div>
+
         </div>
     );
 };

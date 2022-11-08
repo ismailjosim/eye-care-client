@@ -1,7 +1,9 @@
 import React from 'react';
 import blog01 from '../../../assets/blog/SQL-VS-NoSQL-1.jpg'
 import { BsFillChatTextFill, BsFillDiagram2Fill, BsFillClockFill } from "react-icons/bs";
+import useTitle from '../../../hooks/useTitle';
 const Blog = () => {
+    useTitle('Blog')
     return (
         <div className='my-10 page-title-overlay'>
             <section className="bg-primary py-10 relative">
