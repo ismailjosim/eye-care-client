@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
@@ -8,11 +8,10 @@ import ReviewCard from '../Review/ReviewCard';
 
 const ServiceDetails = () => {
     useTitle('Service Details')
+    const { user } = useContext(AuthContext);
     const serviceDetails = useLoaderData();
     const [review, setReview] = useState([]);
     const { _id, img, description, price, title } = serviceDetails.service;
-    const { user } = useContext(AuthContext);
-
 
 
 
@@ -20,14 +19,21 @@ const ServiceDetails = () => {
         e.preventDefault();
         const form = e.target;
 
+        const timer = new Date().getTime();
+        const name = form.name.value;
+        const userEmail = form.email.value;
+        const feedback = form.feedback.value;
+        const service_id = _id;
+        const userImg = user.photoURL;
+
         const currentReview = {
-            name: form.name.value,
-            email: form.email.value,
-            feedback: form.feedback.value,
-            service_id: _id,
-            userEmail: user.email
+            name,
+            userEmail,
+            feedback,
+            service_id,
+            userImg,
+            timer
         }
-        console.log(review);
 
         fetch('http://localhost:5000/reviews', {
             method: "POST",
@@ -39,8 +45,6 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    console.log(data);
-                    setReview([...review, currentReview])
                     toast.success('Review Added Successfully!', { autoClose: 1000 })
 
                 } else {
@@ -53,6 +57,16 @@ const ServiceDetails = () => {
     }
 
 
+
+
+
+
+    // show user Reviews
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews/${ _id }`)
+            .then(res => res.json())
+            .then(data => setReview(data.reviews))
+    }, [_id])
 
 
 
@@ -84,25 +98,33 @@ const ServiceDetails = () => {
                 </div>
                 <div>
                     <h3 className='text-xl mt-10 text-primary text-center my-10 font-bold border-b-8 border-primary'>Add Your Feedback Here</h3>
+
+                    {/*===========> Add Review From <==========*/}
+
                     <form onSubmit={handleReview} className="flex flex-col w-full">
                         <div className='mb-5 flex gap-5'>
                             <div className="space-y-1 text-sm w-1/2">
                                 <label htmlFor="name" className="block text-base font-bold">Name</label>
-                                <input type="name" name="name" defaultValue={user?.displayName} placeholder="Your Name" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
+                                <input type="name" name="name" readOnly defaultValue={user?.displayName} placeholder="Your Name" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                             </div>
                             <div className="space-y-1 text-sm w-1/2">
                                 <label htmlFor="email" className="block text-base font-bold">Email</label>
-                                <input type="email" name="email" defaultValue={user?.email} placeholder="Your email" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
+                                <input type="email" name="email" readOnly defaultValue={user?.email} placeholder="Your email" className="w-full px-4 py-3 rounded-md focus:outline-primary border" required />
                             </div>
                         </div>
                         <textarea rows="3" placeholder="Write Your Feedback..." className="p-4 rounded-md text-black resize-none" spellCheck="false" name='feedback' required></textarea>
-                        <button type="submit" className="py-4 my-8 font-semibold rounded-md text-white bg-primary">Leave feedback</button>
+
+                        {user ?
+                            <button type="submit" className="py-4 my-8 font-semibold rounded-md text-white bg-primary">Leave feedback</button> :
+                            <Link to='/login' className="py-4 my-8 font-semibold rounded-md text-white bg-primary text-center">Please Login First To Add Your Feedback</Link>
+                        }
                     </form>
+                    {/*===========> Add Review From <==========*/}
                 </div>
                 <h3 className='text-xl mt-10 text-warning font-bold'>Previous Reviews Of This Service</h3>
                 <div>
                     {
-                        review?.map((item, idx) => <ReviewCard key={idx} item={item}></ReviewCard>)
+                        review.map((item, idx) => <ReviewCard key={idx} item={item}></ReviewCard>)
 
                     }
                 </div>
