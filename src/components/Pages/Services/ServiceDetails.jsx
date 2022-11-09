@@ -15,7 +15,7 @@ const ServiceDetails = () => {
     const { _id, img, description, price, title } = serviceDetails.service;
 
 
-
+    // Handle Review Function
     const handleReview = e => {
         e.preventDefault();
         const form = e.target;
@@ -121,7 +121,6 @@ const ServiceDetails = () => {
                             <Link to='/login' className="py-4 my-8 font-semibold rounded-md text-white bg-primary text-center">Please Login First To Add Your Feedback</Link>
                         }
                     </form>
-                    {/*===========> Add Review From <==========*/}
                 </div>
                 <h3 className='text-xl mt-10 text-warning font-bold'>Previous Reviews Of This Service</h3>
                 <div>

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-const ReviewRow = ({ handleRemoveReview, review }) => {
-    const { service_id, feedback } = review;
+const ReviewRow = ({ handleRemoveReview, review, refresh, setRefresh }) => {
     const [service, setService] = useState();
+    const { service_id, feedback } = review;
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/service/${ service_id }`)
             .then(res => res.json())
             .then(data => setService(data?.service))
+            .catch(err => (console.log(err.message)))
     }, [service_id])
+
 
     return (
         <tr>
@@ -32,7 +35,7 @@ const ReviewRow = ({ handleRemoveReview, review }) => {
             </td>
             <td className='text-error font-bold'>${service?.price}</td>
             <th>
-                <button onClick={() => handleRemoveReview(review?._id)} className="btn btn-sm btn-ghost">Delete</button>
+                <button onClick={() => handleRemoveReview(review._id)} className="btn btn-sm btn-ghost">Delete</button>
                 <button className="btn btn-sm btn-ghost">Update</button>
             </th>
         </tr>
