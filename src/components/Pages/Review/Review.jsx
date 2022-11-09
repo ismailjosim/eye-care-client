@@ -21,6 +21,9 @@ const Review = () => {
 
 
 
+
+
+
     const handleRemoveReview = id => {
         const proceed = window.confirm("Are You Sure!");
         if (proceed) {
@@ -35,8 +38,6 @@ const Review = () => {
                         const remaining = allReviews.filter(p => p._id !== id);
                         setAllReviews(remaining);
                     }
-
-                    console.log(data.review);
                 })
                 .catch(error => {
                     toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
@@ -46,6 +47,30 @@ const Review = () => {
     }
 
 
+    // const feedback = event.target.feedback.value;
+    const handleUpdate = (event) => {
+        event.preventDefault();
+        const id = event.target.reviewId.value;
+        const feedback = event.target.feedback.value;
+
+        fetch(`http://localhost:5000/reviews/${ id }`, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ feedback })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    const remainingReview = allReviews.filter(review => review._id !== id);
+                    const modifiedReview = allReviews.find(review => review._id === id);
+                    const totalReview = [modifiedReview, ...remainingReview];
+                    setAllReviews(totalReview)
+                    setRefresh(!refresh)
+                }
+            })
+    }
 
 
     return (
@@ -69,8 +94,7 @@ const Review = () => {
                                     key={review._id}
                                     review={review}
                                     handleRemoveReview={handleRemoveReview}
-                                    refresh={refresh}
-                                    setRefresh={setRefresh}
+                                    handleUpdate={handleUpdate}
                                 ></ReviewRow>)
                             }
                         </tbody>
