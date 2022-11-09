@@ -3,6 +3,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
+import ReviewRow from './ReviewRow';
 
 const Review = () => {
     useTitle('Review')
@@ -15,9 +16,9 @@ const Review = () => {
         fetch(`http://localhost:5000/reviews?userEmail=${ user?.email }`)
             .then(res => res.json())
             .then(data => setAllReviews(data.reviews))
-    })
+    }, [])
 
-    console.log(allReviews);
+
 
     //    const handleDelete = id => {
     //         const proceed = window.confirm("Are You Sure!");
@@ -45,34 +46,34 @@ const Review = () => {
 
     return (
         <div>
-            <h3 className='text-3xl my-5 text-center font-bold'>You have Total {allReviews.length} Orders.</h3>
+            <h3 className='text-3xl my-5 text-center font-bold'>See All Of Your Reviews</h3>
+            <div className="w-10/12 p-6 mx-auto divide-y text-slate-700">
 
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full my-16">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <th>Name</th>
-                            <th>Products Details</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            allReviews?.map(order => <TableRow
-                                key={order._id}
-                                order={order}
-                                handleDelete={handleDelete}
-                                handleUpdateStatus={handleUpdateStatus}
-                            ></TableRow>)
-                        }
-                    </tbody>
-                </table>
+                <div className="overflow-x-auto w-full">
+                    <table className="table w-full my-16">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Reviews Details</th>
+                                <th>Price</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                allReviews?.map(review => <ReviewRow
+                                    key={review._id}
+                                    review={review}
+                                ></ReviewRow>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
             </div>
         </div>
     );
@@ -85,7 +86,8 @@ export default Review;
 
 
 
-
+// handleDelete = { handleDelete }
+// handleUpdateStatus = { handleUpdateStatus }
 
 
 
