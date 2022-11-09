@@ -39,6 +39,7 @@ const ReviewRow = ({ handleRemoveReview, review, handleUpdate }) => {
             <th>
                 <button onClick={() => handleRemoveReview(review._id)} className="btn btn-sm btn-ghost">Delete</button>
 
+
                 <label htmlFor="my-modal-5" className="">Edit</label>
                 <input type="checkbox" id="my-modal-5" className="modal-toggle" />
                 <div className="modal">
@@ -52,13 +53,9 @@ const ReviewRow = ({ handleRemoveReview, review, handleUpdate }) => {
                         </div>
                     </form>
                 </div>
-
-
             </th>
         </tr>
     );
 };
 
 export default ReviewRow;
-
-//
