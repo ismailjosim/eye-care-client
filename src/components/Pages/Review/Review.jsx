@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
 
 const Review = () => {
+    const { user } = useContext(AuthContext)
     useTitle('Review')
 
-    const handleDelete = id => {
-        const proceed = window.confirm("Are You Sure!");
-        if (proceed) {
-            fetch(``, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.deletedCount > 0) {
-                        toast.success("Review Removed", { autoClose: 1000 });
-                    }
-                })
-                .catch(error => {
-                    toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
-                    console.log(error.message);
-                })
-        }
-    }
+
+
+
+
+
+
+    // const handleDelete = id => {
+    //     const proceed = window.confirm("Are You Sure!");
+    //     if (proceed) {
+    //         fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`, {
+    //             method: 'DELETE'
+    //         })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 if (data.deletedCount > 0) {
+    //                     toast.success("Review Removed", { autoClose: 1000 });
+    //                 }
+    //             })
+    //             .catch(error => {
+    //                 toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+    //                 console.log(error.message);
+    //             })
+    //     }
+    // }
 
 
 
@@ -83,3 +91,46 @@ const Review = () => {
 };
 
 export default Review;
+
+
+
+
+
+
+
+
+
+
+// import React, { useContext, useEffect, useState } from 'react';
+// import { AuthContext } from '../../context/AuthProvider';
+// import ReviewLoader from './ReviewLoader';
+
+// const Review = ({ image }) => {
+//     const { user } = useContext(AuthContext)
+//     const [reviews, setReviews] = useState([]);
+//     useEffect(() => {
+//         fetch(`http://localhost:5000/reviews?email=${ user.email }`)
+//             .then((res) => res.json())
+//             .then((data) => setReviews(data));
+//     }, [user?.email]);
+//     return (
+//         <div>
+//             <h1 className='text-3xl font-medium title-font text-white mb-12 text-center'>
+//                 Reviews
+//             </h1>
+//             {
+//                 reviews.length === 0 ?
+//                     <p className='text-slate-300 text-2xl font-serif '>There are no review</p>
+//                     :
+//                     <div className='grid  grid-cols-1 md:grid-cols-2  lg:grid-cols-3 '>
+//                         {reviews.map((review) => (
+//                             <ReviewLoader key={review._id} image={image} review={review}></ReviewLoader>
+//                         ))}
+//                     </div>
+//             }
+
+//         </div>
+//     );
+// };
+
+// export default Review;

@@ -4,13 +4,14 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
 import ReviewCard from '../Review/ReviewCard';
-
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceDetails = () => {
     useTitle('Service Details')
     const { user } = useContext(AuthContext);
     const serviceDetails = useLoaderData();
-    const [review, setReview] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const { _id, img, description, price, title } = serviceDetails.service;
 
 
@@ -45,6 +46,7 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+                    setReviews([currentReview, ...reviews])
                     toast.success('Review Added Successfully!', { autoClose: 1000 })
 
                 } else {
@@ -57,15 +59,11 @@ const ServiceDetails = () => {
     }
 
 
-
-
-
-
     // show user Reviews
     useEffect(() => {
         fetch(`http://localhost:5000/reviews/${ _id }`)
             .then(res => res.json())
-            .then(data => setReview(data.reviews))
+            .then(data => setReviews(data.reviews))
     }, [_id])
 
 
@@ -85,7 +83,11 @@ const ServiceDetails = () => {
                 <div className="">
                     <div className="my-3">
                         <div className='flex justify-center'>
-                            <img src={img} alt={title} className="" />
+                            <PhotoProvider>
+                                <PhotoView src={img}>
+                                    <img src={img} alt={title} />
+                                </PhotoView>
+                            </PhotoProvider>
                         </div>
                         <div className="blog-item-content mt-5">
                             <p className='leading-10 text-justify text-xl'>
@@ -124,7 +126,7 @@ const ServiceDetails = () => {
                 <h3 className='text-xl mt-10 text-warning font-bold'>Previous Reviews Of This Service</h3>
                 <div>
                     {
-                        review.map((item, idx) => <ReviewCard key={idx} item={item}></ReviewCard>)
+                        reviews?.map((item, idx) => <ReviewCard key={idx} item={item}></ReviewCard>)
 
                     }
                 </div>
