@@ -1,45 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
 
 const Review = () => {
-    const { user } = useContext(AuthContext)
     useTitle('Review')
+    const { user } = useContext(AuthContext);
+    const [allReviews, setAllReviews] = useState([])
 
 
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews?userEmail=${ user?.email }`)
+            .then(res => res.json())
+            .then(data => setAllReviews(data.reviews))
+    })
 
+    console.log(allReviews);
 
-
-
-    // const handleDelete = id => {
-    //     const proceed = window.confirm("Are You Sure!");
-    //     if (proceed) {
-    //         fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`, {
+    //    const handleDelete = id => {
+    //         const proceed = window.confirm("Are You Sure!");
+    //         if (proceed) {
+    //             fetch(`https://genius-car-server-khaki-five.vercel.app/orders/${ id }`, {
     //             method: 'DELETE'
+    //             })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.deletedCount > 0) {
+    //                 toast.success("Product Removed", { autoClose: 1000 });
+    //                 const remaining = orders.filter(pd => pd._id !== id);
+    //                 setOrders(remaining);
+    //             }
     //         })
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 if (data.deletedCount > 0) {
-    //                     toast.success("Review Removed", { autoClose: 1000 });
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
-    //                 console.log(error.message);
-    //             })
-    //     }
+    //         .catch(error => {
+    //             toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+    //             console.log(error.message);
+    //         })
     // }
+    //     }
 
 
 
 
     return (
         <div>
+            <h3 className='text-3xl my-5 text-center font-bold'>You have Total {allReviews.length} Orders.</h3>
+
             <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+                <table className="table w-full my-16">
                     <thead>
                         <tr>
                             <th>
@@ -48,41 +57,20 @@ const Review = () => {
                                 </label>
                             </th>
                             <th>Name</th>
-                            <th>ID</th>
-                            <th>Review</th>
+                            <th>Products Details</th>
+                            <th>Price</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>
-                                <button className='btn-primary bg-black p-1 rounded-full'>
-                                    <BsPlusLg className='transform rotate-45 text-xl  text-white' />
-                                </button>
-                            </th>
-                            <td>
-                                <div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="w-24 h-24 rounded">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold"></div>
-                                        <div className="text-sm opacity-50"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td className='text-xl font-bold text-secondary'>
-
-                                <br />
-                                <span className="badge badge-ghost badge-sm">ID: </span>
-                            </td>
-                            <td className='text-primary font-semibold'>$</td>
-                            <th>
-                                <button className="btn btn-sm btn-ghost"></button>
-                            </th>
-                        </tr>
-
+                        {
+                            allReviews?.map(order => <TableRow
+                                key={order._id}
+                                order={order}
+                                handleDelete={handleDelete}
+                                handleUpdateStatus={handleUpdateStatus}
+                            ></TableRow>)
+                        }
                     </tbody>
                 </table>
             </div>
