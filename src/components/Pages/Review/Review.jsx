@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
@@ -13,33 +12,33 @@ const Review = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?userEmail=${ user?.email }`)
+        fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`)
             .then(res => res.json())
             .then(data => setAllReviews(data.reviews))
-    }, [])
+    }, [user?.email])
 
 
 
-    //    const handleDelete = id => {
-    //         const proceed = window.confirm("Are You Sure!");
-    //         if (proceed) {
-    //             fetch(`https://genius-car-server-khaki-five.vercel.app/orders/${ id }`, {
-    //             method: 'DELETE'
-    //             })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.deletedCount > 0) {
-    //                 toast.success("Product Removed", { autoClose: 1000 });
-    //                 const remaining = orders.filter(pd => pd._id !== id);
-    //                 setOrders(remaining);
-    //             }
-    //         })
-    //         .catch(error => {
-    //             toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
-    //             console.log(error.message);
-    //         })
-    // }
-    //     }
+    const handleRemoveReview = id => {
+        const proceed = window.confirm("Are You Sure!");
+        if (proceed) {
+            fetch(`http://localhost:5000/review/${ id }`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.success("Review Removed", { autoClose: 1000 });
+                        const remaining = allReviews.filter(review => review._id !== id);
+                        setAllReviews(remaining);
+                    }
+                })
+                .catch(error => {
+                    toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+                    console.log(error.message);
+                })
+        }
+    }
 
 
 
@@ -64,6 +63,7 @@ const Review = () => {
                                 allReviews?.map(review => <ReviewRow
                                     key={review._id}
                                     review={review}
+                                    handleRemoveReview={handleRemoveReview}
                                 ></ReviewRow>)
                             }
                         </tbody>

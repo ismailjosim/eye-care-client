@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BsPlusLg } from "react-icons/bs";
-const ReviewRow = ({ handleDelete, handleUpdateStatus, review }) => {
+
+const ReviewRow = ({ handleRemoveReview, review }) => {
     const { service_id, feedback } = review;
     const [service, setService] = useState();
 
@@ -9,9 +9,6 @@ const ReviewRow = ({ handleDelete, handleUpdateStatus, review }) => {
             .then(res => res.json())
             .then(data => setService(data?.service))
     }, [service_id])
-
-
-
 
     return (
         <tr>
@@ -35,7 +32,7 @@ const ReviewRow = ({ handleDelete, handleUpdateStatus, review }) => {
             </td>
             <td className='text-error font-bold'>${service?.price}</td>
             <th>
-                <button className="btn btn-sm btn-ghost">Pending</button>
+                <button onClick={() => handleRemoveReview(review?._id)} className="btn btn-sm btn-ghost">Delete</button>
                 <button className="btn btn-sm btn-ghost">Update</button>
             </th>
         </tr>
@@ -43,14 +40,4 @@ const ReviewRow = ({ handleDelete, handleUpdateStatus, review }) => {
 };
 
 export default ReviewRow;
-
-
-
-
-
-
-
-//
-
-
 
