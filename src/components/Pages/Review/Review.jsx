@@ -8,10 +8,9 @@ const Review = () => {
     useTitle('Review')
     const { user } = useContext(AuthContext);
     const [allReviews, setAllReviews] = useState([]);
-    const [refresh, setRefresh] = useState(false);
 
 
-
+    // remember to add ? to the parameter.
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`)
             .then(res => res.json())
@@ -42,31 +41,7 @@ const Review = () => {
     }
 
 
-    // const feedback = event.target.feedback.value;
-    const handleUpdate = (event) => {
-        event.preventDefault();
-        const id = event.target.reviewId.value;
-        const feedback = event.target.feedback.value;
 
-        fetch(`http://localhost:5000/reviews/${ id }`, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({ feedback })
-        })
-            .then(res => res.json())
-            .then(data => {
-                const reviews = data.reviews;
-                if (reviews.modifiedCount > 0) {
-                    const remainingReview = allReviews.filter(review => review._id !== id);
-                    const modifiedReview = allReviews.find(review => review._id === id);
-                    const totalReview = [modifiedReview, ...remainingReview];
-                    setAllReviews(totalReview)
-                    setRefresh(!refresh)
-                }
-            })
-    }
 
 
     return (
@@ -90,7 +65,6 @@ const Review = () => {
                                     key={review._id}
                                     review={review}
                                     handleRemoveReview={handleRemoveReview}
-                                    handleUpdate={handleUpdate}
                                 ></ReviewRow>)
                             }
                         </tbody>
