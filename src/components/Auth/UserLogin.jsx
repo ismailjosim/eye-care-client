@@ -55,7 +55,24 @@ const UserLogin = () => {
         googleProviderLogin(provider)
             .then((result) => {
                 toast.success("Login Successful", { autoClose: 1000 });
-                navigate(from, { replace: true });
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                // Get JWT Token
+                fetch('https://assignment-11-server-rose.vercel.app/jwt', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eye-token', data.token)
+                        navigate(from, { replace: true });
+                        console.log(data);
+                    })
             })
             .catch(error => {
                 toast.error("Login Failed", { autoClose: 1000 });
