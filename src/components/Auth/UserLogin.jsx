@@ -9,8 +9,8 @@ import useTitle from '../../hooks/useTitle';
 const UserLogin = () => {
     useTitle('Log In')
     const { userLogin, googleProviderLogin } = useContext(AuthContext);
-    const location = useLocation();
     const navigate = useNavigate();
+    const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
     const googleProvider = new GoogleAuthProvider();
@@ -24,11 +24,11 @@ const UserLogin = () => {
         form.reset();
         userLogin(email, password)
             .then(() => {
-                toast.success("Login Successfully 🎉🎉", { autoClose: 1000 });
+                toast.success("Login Successful", { autoClose: 1000 });
                 navigate(from, { replace: true });
             })
             .catch(error => {
-                toast.error("Login UnsuccessFull! 😢😢", { autoClose: 1000 });
+                toast.error("Login Failed", { autoClose: 1000 });
                 console.log(error.message);
             })
 
@@ -37,11 +37,11 @@ const UserLogin = () => {
     const handleGoogleLogin = () => {
         googleProviderLogin(googleProvider)
             .then(() => {
-                toast.success("User Login Successfully 🎉🎉", { autoClose: 1000 });
+                toast.success("Login Successful", { autoClose: 1000 });
                 navigate(from, { replace: true });
             })
             .catch(error => {
-                toast.error("Something went wrong! 😢😢", { autoClose: 1000 });
+                toast.error("Login Failed", { autoClose: 1000 });
                 console.log(error.message);
             })
 
