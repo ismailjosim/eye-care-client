@@ -23,7 +23,7 @@ const UserLogin = () => {
         const password = form.password.value;
         form.reset();
         userLogin(email, password)
-            .then(() => {
+            .then((result) => {
                 toast.success("Login Successful", { autoClose: 1000 });
                 navigate(from, { replace: true });
             })
@@ -36,7 +36,7 @@ const UserLogin = () => {
 
     const handleGoogleLogin = () => {
         googleProviderLogin(provider)
-            .then(() => {
+            .then((result) => {
                 toast.success("Login Successful", { autoClose: 1000 });
                 navigate(from, { replace: true });
             })

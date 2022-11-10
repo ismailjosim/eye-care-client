@@ -13,21 +13,16 @@ const Review = () => {
 
 
     useEffect(() => {
-        fetch(`https://assignment-11-server-rose.vercel.app/reviews?userEmail=${ user.email }`)
+        fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`)
             .then(res => res.json())
             .then(data => setAllReviews(data.reviews))
     }, [user?.email])
 
 
-
-
-
-
-
     const handleRemoveReview = id => {
         const proceed = window.confirm("Are You Sure!");
         if (proceed) {
-            fetch(`https://assignment-11-server-rose.vercel.app/review/${ id }`, {
+            fetch(`http://localhost:5000/review/${ id }`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -53,7 +48,7 @@ const Review = () => {
         const id = event.target.reviewId.value;
         const feedback = event.target.feedback.value;
 
-        fetch(`https://assignment-11-server-rose.vercel.app/reviews/${ id }`, {
+        fetch(`http://localhost:5000/reviews/${ id }`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

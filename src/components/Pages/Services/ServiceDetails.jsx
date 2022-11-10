@@ -101,8 +101,6 @@ const ServiceDetails = () => {
                 <div>
                     <h3 className='text-xl mt-10 text-primary text-center my-10 font-bold border-b-8 border-primary'>Add Your Feedback Here</h3>
 
-                    {/*===========> Add Review From <==========*/}
-
                     <form onSubmit={handleReview} className="flex flex-col w-full">
                         <div className='mb-5 flex gap-5'>
                             <div className="space-y-1 text-sm w-1/2">

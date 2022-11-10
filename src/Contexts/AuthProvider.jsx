@@ -41,6 +41,7 @@ const AuthProvider = ({ children }) => {
 
     // sign in with google Provider
     const googleProviderLogin = provider => {
+        setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
@@ -48,8 +49,8 @@ const AuthProvider = ({ children }) => {
     // Monitor User change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
             setLoading(false);
+            setUser(currentUser);
         })
 
         return () => {

@@ -5,10 +5,8 @@ import './styles/App.css';
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={routes}>
-      </RouterProvider>
-    </div>
+    <RouterProvider router={routes}>
+    </RouterProvider>
   );
 }
 

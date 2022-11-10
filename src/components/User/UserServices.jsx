@@ -16,7 +16,7 @@ const UserServices = () => {
             description: form.description.value,
         };
         console.log(service);
-        fetch('https://assignment-11-server-rose.vercel.app/services', {
+        fetch('http://localhost:5000/services', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

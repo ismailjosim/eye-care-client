@@ -32,4 +32,4 @@ const ServiceCard = ({ service }) => {
 };
 
 export default ServiceCard;
-// <img src={img} alt={title} />
+

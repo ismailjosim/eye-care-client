@@ -6,7 +6,7 @@ const ReviewRow = ({ handleRemoveReview, review, handleUpdate }) => {
 
 
     useEffect(() => {
-        fetch(`https://assignment-11-server-rose.vercel.app/service/${ service_id }`)
+        fetch(`http://localhost:5000/service/${ service_id }`)
             .then(res => res.json())
             .then(data => setService(data?.service))
             .catch(err => (console.log(err.message)))
@@ -35,6 +35,18 @@ const ReviewRow = ({ handleRemoveReview, review, handleUpdate }) => {
             <th>
                 <button onClick={() => handleRemoveReview(review._id)} className="btn btn-sm btn-ghost">Delete</button>
                 <label htmlFor="my-modal-5" className="">Edit</label>
+                <input type="checkbox" id="my-modal-5" className="modal-toggle" />
+                <div className="modal">
+                    <form onSubmit={handleUpdate} className="modal-box w-11/12 max-w-5xl">
+                        <h3 className="font-bold text-lg">Update Your Review From Here!</h3>
+                        <input type="text" className='hidden' name='reviewId' defaultValue={_id} />
+                        <textarea rows="10" defaultValue={feedback} className="w-full rounded-sm text-black resize-none" name='feedback'></textarea>
+                        <div className="modal-action">
+                            <button type='submit'><label htmlFor="my-modal-5" className="btn">Confirm update</label></button>
+                            <label htmlFor="my-modal-5" className="btn">Cancel</label>
+                        </div>
+                    </form>
+                </div>
 
             </th>
         </tr>
@@ -44,15 +56,3 @@ const ReviewRow = ({ handleRemoveReview, review, handleUpdate }) => {
 export default ReviewRow;
 
 
-//  <input type="checkbox" id="my-modal-5" className="modal-toggle" />
-//                 <div className="modal">
-//                     <form onSubmit={handleUpdate} className="modal-box w-11/12 max-w-5xl">
-//                         <h3 className="font-bold text-lg">Update Your Review From Here!</h3>
-//                         <input type="text" className='hidden' name='reviewId' defaultValue={_id} />
-//                         <textarea rows="10" defaultValue={feedback} className="w-full rounded-sm text-black resize-none" name='feedback'></textarea>
-//                         <div className="modal-action">
-//                             <button type='submit'><label htmlFor="my-modal-5" className="btn">Confirm update</label></button>
-//                             <label htmlFor="my-modal-5" className="btn">Cancel</label>
-//                         </div>
-//                     </form>
-//                 </div>

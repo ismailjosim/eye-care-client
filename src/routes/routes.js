@@ -50,7 +50,7 @@ const routes = createBrowserRouter([
             {
                 path: '/service/:id',
                 element: <ServiceDetails />,
-                loader: ({ params }) => fetch(`https://assignment-11-server-rose.vercel.app/service/${ params.id }`)
+                loader: ({ params }) => fetch(`http://localhost:5000/service/${ params.id }`)
             },
             {
                 path: '/addService',

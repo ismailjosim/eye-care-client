@@ -15,7 +15,6 @@ const ReviewCard = ({ item }) => {
                     </div>
                     <div>
                         <h4 className="font-bold">{name}</h4>
-                        <span className="text-xs dark:text-gray-400">2 days ago</span>
                     </div>
                 </div>
             </div>
