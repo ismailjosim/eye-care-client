@@ -58,7 +58,7 @@ const Review = () => {
 
     return (
         <div>
-            <h3 className='text-3xl my-5 text-center font-bold'>See All Of Your Reviews</h3>
+            <h3 className='lg:text-3xl text-xl text-center font-bold'>See All Of Your Reviews</h3>
             <div className="w-10/12 p-6 mx-auto divide-y text-slate-700">
 
                 <div className="overflow-x-auto w-full mb-40">
