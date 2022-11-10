@@ -74,12 +74,12 @@ const ServiceDetails = () => {
                 <div className="container mx-auto">
                     <div className="block text-center">
                         <span className="text-white">Service Details</span>
-                        <h1 className="capitalize mb-5 text-4xl font-bold text-white my-5">{title}</h1>
+                        <h1 className="capitalize mb-5 lg:text-4xl text-2xl font-bold text-white my-5">{title}</h1>
                         <h3 className="font-semibold text-2xl text-error">Service Charge: ${price}</h3>
                     </div>
                 </div>
             </section>
-            <div className="w-7/12 mx-auto">
+            <div className="lg:w-7/12 w-10/12 mx-auto">
                 <div className="">
                     <div className="my-3">
                         <div className='flex justify-center'>
@@ -90,7 +90,7 @@ const ServiceDetails = () => {
                             </PhotoProvider>
                         </div>
                         <div className="blog-item-content mt-5">
-                            <p className='leading-10 text-justify text-xl'>
+                            <p className='leading-10 text-justify lg:text-xl text-base'>
                                 {description}
                             </p>
                         </div>
@@ -128,7 +128,6 @@ const ServiceDetails = () => {
                     }
                 </div>
             </div>
-
         </div>
     );
 }

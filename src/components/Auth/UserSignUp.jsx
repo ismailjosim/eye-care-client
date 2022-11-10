@@ -51,7 +51,7 @@ const UserSignUp = () => {
     return (
         <div>
             <div className='flex justify-around my-10 items-center'>
-                <div className='w-1/2'>
+                <div className='w-1/2 lg:block hidden'>
                     <img src={loginImg} alt="" />
                 </div>
                 <div className="w-full max-w-md p-8 space-y-3 rounded-xl border-2">
