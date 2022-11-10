@@ -78,7 +78,6 @@ const UserLogin = () => {
                 toast.error("Login Failed", { autoClose: 1000 });
                 console.log(error.message);
             })
-
     }
 
 
