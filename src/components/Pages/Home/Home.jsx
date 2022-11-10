@@ -1,5 +1,6 @@
 import React from 'react';
 import useTitle from '../../../hooks/useTitle';
+import About from './About';
 import Appointment from './Appointment';
 import Gallery from './Gallery';
 import Hero from './Hero';
@@ -11,6 +12,7 @@ const Home = () => {
         <div>
             <Hero />
             <Appointment />
+            <About />
             <HomeServices />
             <Gallery />
             <section className="py-6 text-black">
