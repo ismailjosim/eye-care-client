@@ -13,7 +13,7 @@ const UserLogin = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
-    const googleProvider = new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
 
     const handleUserLogin = event => {
 
@@ -35,7 +35,7 @@ const UserLogin = () => {
     }
 
     const handleGoogleLogin = () => {
-        googleProviderLogin(googleProvider)
+        googleProviderLogin(provider)
             .then(() => {
                 toast.success("Login Successful", { autoClose: 1000 });
                 navigate(from, { replace: true });

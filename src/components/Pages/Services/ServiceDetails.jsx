@@ -36,7 +36,7 @@ const ServiceDetails = () => {
             timer
         }
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://assignment-11-server-rose.vercel.app/reviews', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -61,7 +61,7 @@ const ServiceDetails = () => {
 
     // show user Reviews
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${ _id }`)
+        fetch(`https://assignment-11-server-rose.vercel.app/reviews/${ _id }`)
             .then(res => res.json())
             .then(data => setReviews(data.reviews))
     }, [_id])
