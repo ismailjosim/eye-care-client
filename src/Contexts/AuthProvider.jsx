@@ -31,6 +31,7 @@ const AuthProvider = ({ children }) => {
     }
     // signOut user functionality
     const userLogout = () => {
+        localStorage.removeItem('eye-token')
         return signOut(auth);
     }
 

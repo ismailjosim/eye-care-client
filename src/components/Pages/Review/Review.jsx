@@ -6,16 +6,28 @@ import ReviewRow from './ReviewRow';
 
 const Review = () => {
     useTitle('Review')
-    const { user } = useContext(AuthContext);
+    const { user, userLogout } = useContext(AuthContext);
     const [allReviews, setAllReviews] = useState([]);
 
 
     // remember to add ? to the parameter.
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?userEmail=${ user.email }`)
-            .then(res => res.json())
-            .then(data => setAllReviews(data.reviews))
-    }, [user?.email])
+        fetch(`http://localhost:5000/reviews?email=${ user?.email }`, {
+            headers: {
+                authorization: `Bearer ${ localStorage.getItem('eye-token') }`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return userLogout()
+                }
+                return res.json()
+            })
+            .then(data => setAllReviews(data?.reviews))
+
+    }, [user?.email, userLogout])
+
+
 
 
     const handleRemoveReview = id => {

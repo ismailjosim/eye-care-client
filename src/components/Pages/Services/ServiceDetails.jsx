@@ -22,14 +22,14 @@ const ServiceDetails = () => {
 
         const timer = new Date().getTime();
         const name = form.name.value;
-        const userEmail = form.email.value;
+        const email = form.email.value;
         const feedback = form.feedback.value;
         const service_id = _id;
         const userImg = user.photoURL;
 
         const currentReview = {
             name,
-            userEmail,
+            email,
             feedback,
             service_id,
             userImg,

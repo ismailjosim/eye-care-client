@@ -82,65 +82,23 @@ const ReviewRow = ({ handleRemoveReview, review }) => {
             <td className='text-error font-bold'>${service?.price}</td>
             <th>
                 <button onClick={() => handleRemoveReview(review._id)} className="btn btn-sm btn-ghost">Delete</button>
-                <button
-                    onClick={() => {
-                        return handleReviewConfirmation(review);
-                    }}
-                >
-                    Update
-                </button>
-                <div
-                    className={`bg-white/70 w-full h-full py-10   top-0 left-0 ${ update ? "absolute " : " hidden"
-                        } `}
-                >
-                    <h3 className="text-3xl text-red-600 font-bold text-center py-10">
-                        Review Update Section
-                    </h3>
+                <button onClick={() => { return handleReviewConfirmation(review) }}>Update</button>
+                <div className={`w-full h-full top-0 left-0 ${ update ? "absolute" : " hidden" } `}>
                     <div className="flex flex-col items-center  mx-auto justify-center p-8 shadow-sm rounded-xl lg:p-12 md:w-[50%] bg-white border text-gray-900">
                         <div className="flex flex-col items-center w-full">
-                            <h2 className="text-3xl font-semibold text-center">
-                                Your opinion matters!
-                            </h2>
-                            <div className="flex flex-col items-center py-6 space-y-3">
-                                <span className="text-center">
-                                    How was your experience?
-                                </span>
-
-                            </div>
-
-
-                            <form
-                                onSubmit={handleUpdate}
-                                className="flex flex-col w-full"
-                            >
-                                <textarea
-                                    name="feedback"
-                                    rows="3"
-                                    placeholder="Message..."
-                                    defaultValue={defaultReview}
-                                    className="p-4 rounded-md border-2 border-black resize-none text-gray-900 bg-white"
-                                ></textarea>
-                                <button
-                                    type="submit"
-                                    className="py-4 my-8 font-semibold rounded-md text-white bg-primary"
-                                >
-                                    Update feedback
-                                </button>
+                            <form onSubmit={handleUpdate} className="flex flex-col w-full" >
+                                <textarea name="feedback" rows="3" placeholder="Message..." defaultValue={defaultReview} className="p-4 rounded-md border-2 border-black resize-none text-gray-900 bg-white"></textarea>
+                                <button type="submit" className="py-4 my-8 font-semibold rounded-md text-white bg-primary">Update feedback</button>
                             </form>
                         </div>
                         <div className="flex items-center justify-center">
-                            <button
-                                onClick={() => setUpdate(false)}
-                                className="text-xl text-gray-400"
-                            >
-                                Maybe later
-                            </button>
+                            <button onClick={() => setUpdate(false)} className="btn btn-error text-white">Close</button>
                         </div>
                     </div>
                 </div>
 
             </th>
-        </tr>
+        </tr >
     );
 };
 

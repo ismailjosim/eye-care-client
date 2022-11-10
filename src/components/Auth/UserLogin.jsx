@@ -25,7 +25,24 @@ const UserLogin = () => {
         userLogin(email, password)
             .then((result) => {
                 toast.success("Login Successful", { autoClose: 1000 });
-                navigate(from, { replace: true });
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                // Get JWT Token
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('eye-token', data.token)
+                        navigate(from, { replace: true });
+                        console.log(data);
+                    })
             })
             .catch(error => {
                 toast.error("Login Failed", { autoClose: 1000 });
