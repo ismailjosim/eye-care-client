@@ -12,7 +12,7 @@ const Review = () => {
 
     // remember to add ? to the parameter.
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${ user?.email }`, {
+        fetch(`https://assignment-11-server-rose.vercel.app/reviews?email=${ user?.email }`, {
             headers: {
                 authorization: `Bearer ${ localStorage.getItem('eye-token') }`
             }
@@ -33,7 +33,7 @@ const Review = () => {
     const handleRemoveReview = id => {
         const proceed = window.confirm("Are You Sure!");
         if (proceed) {
-            fetch(`http://localhost:5000/review/${ id }`, {
+            fetch(`https://assignment-11-server-rose.vercel.app/review/${ id }`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

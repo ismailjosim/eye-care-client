@@ -30,7 +30,7 @@ const UserLogin = () => {
                     email: user.email
                 }
                 // Get JWT Token
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://assignment-11-server-rose.vercel.app/jwt', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

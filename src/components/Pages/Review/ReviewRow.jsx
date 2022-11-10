@@ -12,7 +12,7 @@ const ReviewRow = ({ handleRemoveReview, review }) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${ service_id }`)
+        fetch(`https://assignment-11-server-rose.vercel.app/service/${ service_id }`)
             .then(res => res.json())
             .then(data => setService(data?.service))
             .catch(err => (console.log(err.message)))
@@ -44,7 +44,7 @@ const ReviewRow = ({ handleRemoveReview, review }) => {
         event.preventDefault();
         const form = event.target;
         const feedback = form.feedback.value;
-        fetch(`http://localhost:5000/reviews/${ reviewId }`, {
+        fetch(`https://assignment-11-server-rose.vercel.app/reviews/${ reviewId }`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
