@@ -26,23 +26,8 @@ const UserLogin = () => {
             .then((result) => {
                 toast.success("Login Successful", { autoClose: 1000 });
                 const user = result.user;
-                const currentUser = {
-                    email: user.email
-                }
-                // Get JWT Token
-                fetch('https://assignment-11-server-rose.vercel.app/jwt', {
-                    method: "POST",
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('eye-token', data.token)
-                        navigate(from, { replace: true });
-                        console.log(data);
-                    })
+                navigate(from, { replace: true })
+                console.log(user);
             })
             .catch(error => {
                 toast.error("Login Failed", { autoClose: 1000 });
@@ -70,7 +55,7 @@ const UserLogin = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('eye-token', data.token)
-                        navigate(from, { replace: true });
+                        navigateNow();
                         console.log(data);
                     })
             })
@@ -78,6 +63,11 @@ const UserLogin = () => {
                 toast.error("Login Failed", { autoClose: 1000 });
                 console.log(error.message);
             })
+    }
+
+    // setup navigator After Register.
+    const navigateNow = () => {
+        setTimeout(() => { navigate(from, { replace: true }) }, 1);
     }
 
 

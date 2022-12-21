@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import loginImg from '../../assets/slider/slider05.jpg'
@@ -9,6 +9,10 @@ import useTitle from '../../hooks/useTitle';
 const UserSignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
     useTitle('Sign Up')
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
 
     const handleUserSignUP = event => {
         event.preventDefault();
@@ -24,6 +28,7 @@ const UserSignUp = () => {
                 toast.success("Congratulations! User Created Successfully 🎉🎉", { autoClose: 1000 });
                 console.log(user);
                 handleProfileUpdate(name, photoURL);
+                navigateNow();
 
             })
             .catch(error => {
@@ -46,6 +51,10 @@ const UserSignUp = () => {
             })
     }
 
+    // setup navigator After Register.
+    const navigateNow = () => {
+        setTimeout(() => { navigate(from, { replace: true }) }, 1);
+    }
 
 
     return (

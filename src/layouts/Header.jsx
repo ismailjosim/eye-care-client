@@ -40,8 +40,6 @@ const Header = () => {
                             <li className='list-none'><Link to='/addService'>Add Services</Link></li>
                             <li className='list-none'> <button onClick={handleUserRemove} className="btn btn-md rounded-md btn-outline btn-primary">Logout</button></li>
                         </ul>
-
-
                     </div>
                     :
                     <Link to='/login' className="btn btn-md rounded-md btn-outline btn-primary">Log In</Link>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 import useTitle from '../../../hooks/useTitle';
@@ -13,6 +13,7 @@ const ServiceDetails = () => {
     const serviceDetails = useLoaderData();
     const [reviews, setReviews] = useState([]);
     const { _id, img, description, price, title } = serviceDetails.service;
+    const location = useLocation();
 
 
     // Handle Review Function
@@ -116,7 +117,7 @@ const ServiceDetails = () => {
 
                         {user ?
                             <button type="submit" className="py-4 my-8 font-semibold rounded-md text-white bg-primary">Leave feedback</button> :
-                            <Link to='/login' className="py-4 my-8 font-semibold rounded-md text-white bg-primary text-center">Please Login First To Add Your Feedback</Link>
+                            <Link to='/login' state={{ from: location }} replace className="py-4 my-8 font-semibold rounded-md text-white bg-primary text-center">Please Login First To Add Your Feedback</Link>
                         }
                     </form>
                 </div>
